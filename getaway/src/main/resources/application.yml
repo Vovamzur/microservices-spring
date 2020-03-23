@@ -1,8 +1,0 @@
-#spring:
-#  cloud:
-#    getaway:
-#      routes:
-#        - id: countries-route
-#          uri: lb://countries-service/
-#          predicates:
-#            - Path=//countries/**
