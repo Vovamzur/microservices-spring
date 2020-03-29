@@ -15,4 +15,3 @@ ADD https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.s
 RUN chmod +x wait-for-it.sh
 
 ENTRYPOINT ["./wait-for-it.sh", "--", "java", "-Djava.security.egd=file:/dev/./urandom","-jar","/app/getaway.jar"]
-
