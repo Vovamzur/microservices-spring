@@ -1,12 +1,12 @@
 ### Api-gateway config
-GET http://localhost:8080/config
+GET http://localhost:8080/configs
 Content-type: application/json
 {
   ...
 }
 
 ### Service (instance 1) config
-GET http://localhost:8081/config
+GET http://localhost:8081/configs
 Content-type: application/json
 
 {
@@ -14,7 +14,7 @@ Content-type: application/json
 }
 
 ### Service (instance 2) config
-GET http://localhost:8082/config
+GET http://localhost:8082/configs
 Content-type: application/json
 
 {
