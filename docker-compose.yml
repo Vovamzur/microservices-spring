@@ -5,14 +5,14 @@ services:
       context: demo
       dockerfile: Dockerfile
     ports:
-      - "127.0.0.1:8671:8761"
+      - "8671:8761"
 
   configserver:
     build:
       context: config-server
       dockerfile: Dockerfile
     ports:
-      - "127.0.0.1:8888:8888"
+      - "8888:8888"
     environment:
       WAITFORIT_HOST: eureka-server
       WAITFORIT_PORT: 8761
@@ -39,7 +39,7 @@ services:
       context: client
       dockerfile: Dockerfile
     ports:
-      - "127.0.0.1:8081-8082:8081"
+      - "8081-8082:8081"
     environment:
       WAITFORIT_HOST: configserver
       WAITFORIT_PORT: 8888
@@ -54,7 +54,7 @@ services:
       context: getaway
       dockerfile: Dockerfile
     ports:
-      - "127.0.0.1:8080:8080"
+      - "8080:8080"
     environment:
       WAITFORIT_HOST: configserver
       WAITFORIT_PORT: 8888
