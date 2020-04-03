@@ -30,11 +30,11 @@ services:
       POSTGRES_PASSWORD: password
       POSTGRES_USER: postgres
       POSTGRES_DB: countryDb
-      PGPORT: 5433
+      PGPORT: 5434
     volumes:
       - /docker-volumes/postgres/data:/var/lib/postgresql/data
     ports:
-      - "5433:5433"
+      - "5434:5434"
 
   client:
     build:
