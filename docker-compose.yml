@@ -6,7 +6,7 @@ services:
       context: demo
       dockerfile: Dockerfile
     ports:
-      - "8671:8761"
+      - "8761:8761"
 
   configserver:
     build:

@@ -2,31 +2,32 @@
 GET http://localhost:8080/configs
 Content-type: application/json
 {
-  ...
+  "property1": "...",
+  "property2": "..."
 }
 
 ### Service (instance 1) config
 GET http://localhost:8081/configs
 Content-type: application/json
-
 {
-  ...
+  "property1": "...",
+  "property2": "..."
 }
 
 ### Service (instance 2) config
 GET http://localhost:8082/configs
 Content-type: application/json
-
 {
-  ...
+  "property1": "...",
+  "property2": "..."
 }
 
 ### Configs in config server
-GET http://localhost:8888/client/default
+GET http://localhost:8888/countries-service/default
 Content-type: application/json
-
 {
-  ...
+  "property1": "...",
+  "property2": "..."
 }
 
 ### Config refresh
