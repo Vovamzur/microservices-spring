@@ -15,7 +15,6 @@ public class ConfigController {
     @Autowired
     private ConfigClientAppConfiguration configClientAppConfiguration;
 
-    // i can't serialize ConfigurationProperties with @ResponseBody annotation, so just use Map
     @GetMapping("/configs")
     @ResponseBody
     public Map<String, String> getConfig () {

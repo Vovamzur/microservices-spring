@@ -1,5 +1,6 @@
-package com.example.getaway;
+package com.example.getaway.controller;
 
+import com.example.getaway.ConfigClientAppConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -14,7 +15,6 @@ public class ConfigController {
     @Autowired
     private ConfigClientAppConfiguration configClientAppConfiguration;
 
-    // i can't serialize ConfigurationProperties with @ResponseBody annotation, so just use Map
     @GetMapping("/configs")
     @ResponseBody
     public Map<String, String> getConfig () {

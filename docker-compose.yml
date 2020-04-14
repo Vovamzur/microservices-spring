@@ -17,7 +17,7 @@ services:
     environment:
       WAITFORIT_HOST: eureka-server
       WAITFORIT_PORT: 8761
-      WAITFORIT_TIMEOUT: 30
+      WAITFORIT_TIMEOUT: 60
     depends_on:
       - eureka-server
 
@@ -45,7 +45,7 @@ services:
     environment:
       WAITFORIT_HOST: configserver
       WAITFORIT_PORT: 8888
-      WAITFORIT_TIMEOUT: 60
+      WAITFORIT_TIMEOUT: 120
     depends_on:
       - eureka-server
       - postgres
@@ -60,7 +60,7 @@ services:
     environment:
       WAITFORIT_HOST: configserver
       WAITFORIT_PORT: 8888
-      WAITFORIT_TIMEOUT: 60
+      WAITFORIT_TIMEOUT: 120
     depends_on:
       - eureka-server
       - client
@@ -71,3 +71,20 @@ services:
     ports:
       - "15672:15672"
       - "5672:5672"
+  
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    network_mode: host
+    volumes:
+    - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+    - "9090:9090"
+    - "9080:9080"
+  
+  grafana:
+    image: grafana/grafana
+    network_mode: host
+    ports:
+    - "3000:3000"
+    
