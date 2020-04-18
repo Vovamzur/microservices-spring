@@ -7,7 +7,6 @@ import com.example.getaway.dto.CountryAndServiceName;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import io.github.resilience4j.retry.annotation.Retry;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -26,26 +25,22 @@ public class ProxyService {
     }
 
     @CircuitBreaker(name = BACKEND_A, fallbackMethod = "oneFallback")
-    public CountriesAndServiceName getCountryId() {
-        return serviceClient.getCountries();
-    }
-
     public CountryAndServiceName getCountryById(@PathVariable(name="id") Long id) {
         return serviceClient.getCountryById(id);
     }
 
     @Retry(name = BACKEND_A)
-    public ResponseEntity saveNewCountry(Country country) {
+    public Country saveNewCountry(Country country) {
         return serviceClient.saveNewCountry(country);
     }
 
     @Retry(name = BACKEND_A)
-    public ResponseEntity<Country> updateCountry(Country country) {
+    public Country updateCountry(Country country) {
         return serviceClient.updateCountry(country);
     }
 
     @Retry(name=BACKEND_A)
-    public ResponseEntity<String> deleteCountryById(@PathVariable(name="id") Long id) {
+    public String deleteCountryById(@PathVariable(name="id") Long id) {
         return this.serviceClient.deleteCountryById(id);
     }
 

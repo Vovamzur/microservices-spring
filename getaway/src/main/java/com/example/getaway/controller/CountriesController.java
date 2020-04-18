@@ -30,17 +30,17 @@ public class CountriesController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity saveNewCountry (@RequestBody Country country) {
+    public Country saveNewCountry (@RequestBody Country country) {
         return this.countriesService.saveNewCountry(country);
     }
 
     @PutMapping("/update")
-    public ResponseEntity<Country> updateCountry (@RequestBody Country country) {
+    public Country updateCountry (@RequestBody Country country) {
         return this.countriesService.updateCountry(country);
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<String> deleteCountryById (@PathVariable(name="id") Long id) {
+    public String deleteCountryById (@PathVariable(name="id") Long id) {
         return this.countriesService.deleteCountryById(id);
     }
 }

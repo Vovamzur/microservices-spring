@@ -8,7 +8,7 @@ import java.util.List;
 
 @Getter
 @ResponseStatus(HttpStatus.BAD_REQUEST)
-public class ValidationException extends RuntimeException{
+public class ValidationException extends RuntimeException {
     private List<String> errors;
 
     public ValidationException(List<String> errors) {

@@ -15,6 +15,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -29,16 +30,27 @@ public class CountryController {
     @Autowired
     private CountryRepository countryRepository;
 
+    private List<String> checkForUnique(Country country) {
+        List<String> errors = new ArrayList<>();
+        if (countryRepository.findByCapital(country.getCapital()).isPresent()) {
+            errors.add("country with " + country.getCapital() + " capital is already exists");
+        }
+        if (countryRepository.findByName((country.getName())).isPresent()) {
+            errors.add("country with " + country.getName() + " name is already exists");
+        }
+        return errors;
+    }
+
     @GetMapping("")
     @ResponseBody
-    public CountriesAndServiceName getCountries () {
+    public CountriesAndServiceName getCountries() {
         List<Country> countries = countryRepository.findAll();
         return new CountriesAndServiceName(countries, serviceInstanceId);
     }
 
     @GetMapping("/{countryId}")
     @ResponseBody
-    public CountryAndServiceName getCountryById (@PathVariable("countryId") Long countryId) {
+    public CountryAndServiceName getCountryById(@PathVariable("countryId") Long countryId) {
         Country country = countryRepository.findById(countryId).orElseThrow(
                 () -> new ResourceNotFoundException("Country with such id " + countryId + " does not exist")
         );
@@ -47,7 +59,10 @@ public class CountryController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity saveNewCountry (@Valid @RequestBody Country country, BindingResult bindingResult) throws  ValidationException {
+    @ResponseStatus(HttpStatus.CREATED)
+    public Country saveNewCountry(
+            @Valid @RequestBody Country country, BindingResult bindingResult
+    ) throws ValidationException {
         if (bindingResult.hasErrors()) {
             List<String> errors = bindingResult
                     .getAllErrors()
@@ -56,11 +71,19 @@ public class CountryController {
                     .collect(Collectors.toList());
             throw new ValidationException(errors);
         }
-        return ResponseEntity.status(HttpStatus.CREATED).body(this.countryRepository.save(country));
+        List uniqueErrors = this.checkForUnique(country);
+
+        if (uniqueErrors.size() > 0) {
+            throw new ValidationException(uniqueErrors);
+        }
+        return this.countryRepository.save(country);
     }
 
     @PutMapping("/update")
-    public ResponseEntity<Country> updateCountry (@Valid @RequestBody Country country, BindingResult bindingResult) throws  ValidationException {
+    @ResponseStatus(HttpStatus.OK)
+    public Country updateCountry(
+            @Valid @RequestBody Country country, BindingResult bindingResult
+    ) throws ValidationException, ResourceNotFoundException {
         if (bindingResult.hasErrors()) {
             List<String> errors = bindingResult
                     .getAllErrors()
@@ -72,27 +95,26 @@ public class CountryController {
         Optional<Country> bdCountry = this.countryRepository.findById(country.getId());
 
         if (!bdCountry.isPresent()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+            throw new ResourceNotFoundException("Country with such id " + country.getId() + " does not exist");
         }
 
-        Country newCountry = this.countryRepository.save(country);
+        List uniqueErrors = this.checkForUnique(country);
+        if (uniqueErrors.size() > 0) {
+            throw new ValidationException(uniqueErrors);
+        }
 
-        return ResponseEntity.status(HttpStatus.OK).body(newCountry);
+        return this.countryRepository.save(country);
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<String> deleteCountryById (@PathVariable(name="id") Long id) {
+    @ResponseStatus(HttpStatus.OK)
+    public String deleteCountryById(@PathVariable(name = "id") Long id) {
         Optional<Country> bdCountry = this.countryRepository.findById(id);
 
         if (!bdCountry.isPresent()) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("There is  no country with such id " +  id);
+            throw new ResourceNotFoundException("There is  no country with such id " + id);
         }
-
-        try {
-            this.countryRepository.deleteById(id);
-        } catch (Exception ex) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body( "Something went wrong!. Try again");
-        }
-        return ResponseEntity.status(HttpStatus.OK).body("Successfully deleted");
+        this.countryRepository.deleteById(id);
+        return "Successfully deleted";
     }
 }
