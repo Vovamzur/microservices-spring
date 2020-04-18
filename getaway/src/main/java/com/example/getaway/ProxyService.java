@@ -17,7 +17,7 @@ public class ProxyService {
     private static final String BACKEND_A = "countries-service";
 
     @Autowired
-    private CountriesService serviceClient;
+    private ProxyService serviceClient;
 
     @CircuitBreaker(name = BACKEND_A, fallbackMethod = "allFallback")
     public CountriesAndServiceName getCountries() {
@@ -25,7 +25,7 @@ public class ProxyService {
     }
 
     @CircuitBreaker(name = BACKEND_A, fallbackMethod = "oneFallback")
-    public CountryAndServiceName getCountryById(@PathVariable(name="id") Long id) {
+    public CountryAndServiceName getCountryById(@PathVariable(name = "id") Long id) {
         return serviceClient.getCountryById(id);
     }
 
@@ -39,8 +39,8 @@ public class ProxyService {
         return serviceClient.updateCountry(country);
     }
 
-    @Retry(name=BACKEND_A)
-    public String deleteCountryById(@PathVariable(name="id") Long id) {
+    @Retry(name = BACKEND_A)
+    public String deleteCountryById(@PathVariable(name = "id") Long id) {
         return this.serviceClient.deleteCountryById(id);
     }
 

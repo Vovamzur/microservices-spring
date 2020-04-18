@@ -15,7 +15,7 @@ public class CustomErrorAttributes extends DefaultErrorAttributes {
         Map<String, Object> errorAttributes = super.getErrorAttributes(requestAttributes, includeStackTrace);
         Throwable error = getError(requestAttributes);
         if (error instanceof ValidationException) {
-            errorAttributes.put("errors", ((ValidationException)error).getErrors());
+            errorAttributes.put("errors", ((ValidationException) error).getErrors());
         }
         return errorAttributes;
     }

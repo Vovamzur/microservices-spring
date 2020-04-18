@@ -17,7 +17,7 @@ public class ConfigController {
 
     @GetMapping("/configs")
     @ResponseBody
-    public Map<String, String> getConfig () {
+    public Map<String, String> getConfig() {
         HashMap<String, String> map = new HashMap<>();
         map.put("property1", this.configClientAppConfiguration.getProperty1());
         map.put("property2", this.configClientAppConfiguration.getProperty2());

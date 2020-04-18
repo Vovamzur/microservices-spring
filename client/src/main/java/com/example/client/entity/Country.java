@@ -32,7 +32,7 @@ public class Country {
     @Column(name = "currency")
     private String currency;
 
-    @Size(min=1, message = "should pass at least one language")
+    @Size(min = 1, message = "should pass at least one language")
     @ElementCollection
     @Column(name = "language")
     private Set<@NotBlank String> languages = new HashSet<>();
@@ -42,7 +42,7 @@ public class Country {
     private String capital;
 
     @Min(value = 1, message = "Population should be unsigned number")
-    @Digits(integer=10, fraction = 0, message = "Population should be unsigned long")
+    @Digits(integer = 10, fraction = 0, message = "Population should be unsigned long")
     @NotNull(message = "population can't be null")
     @Column(name = "population")
     private long population;
@@ -51,14 +51,14 @@ public class Country {
     @Column(name = "phonePrefix")
     private String phonePrefix;
 
-    @Min(value=1, message = "Budget should be bigger than 1")
-    @Digits(integer=12, fraction = 0, message = "Budget should be unsigned long")
+    @Min(value = 1, message = "Budget should be bigger than 1")
+    @Digits(integer = 12, fraction = 0, message = "Budget should be unsigned long")
     @NotNull(message = "budget can't be null")
     @Column(name = "budget")
     private long budget;
 
-    @Min(value=1, message = "GDP should be bigger than 1")
-    @Digits(integer=15, fraction = 0, message = "GDP should be unsigned long")
+    @Min(value = 1, message = "GDP should be bigger than 1")
+    @Digits(integer = 15, fraction = 0, message = "GDP should be unsigned long")
     @NotNull(message = "gdp can't be null")
     @Column(name = "gdp")
     private long gdp;

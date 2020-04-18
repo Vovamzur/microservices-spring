@@ -9,10 +9,12 @@ import org.springframework.context.annotation.Bean;
 public class CountrieServiceConfigurations {
 
     @Bean
-    public Encoder encoder() { return new GsonEncoder(); }
+    public Encoder encoder() {
+        return new GsonEncoder();
+    }
 
     @Bean
-    public Decoder decoder(){
+    public Decoder decoder() {
         return new GsonDecoder();
     }
 }
