@@ -9,9 +9,11 @@ import org.springframework.web.bind.annotation.*;
 @FeignClient(name = "countries-service", configuration = CountrieServiceConfigurations.class)
 public interface CountriesService {
     @RequestMapping(method = RequestMethod.GET, value = "/api/countries", consumes = "application/json")
+//    @RequestMapping(method = RequestMethod.GET, value = "/api/countries")
     CountriesAndServiceName getCountries();
 
     @RequestMapping(method = RequestMethod.GET, value = "/api/countries/{countryId}", consumes = "application/json")
+//    @RequestMapping(method = RequestMethod.GET, value = "/api/countries/{countryId}")
     CountryAndServiceName getCountryById(@PathVariable("countryId") Long countryId);
 
     @RequestMapping(method = RequestMethod.POST, value = "/api/countries/create", consumes = "application/json")

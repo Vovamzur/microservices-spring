@@ -1,6 +1,5 @@
 package com.example.getaway;
 
-import com.example.getaway.client.CountriesService;
 import com.example.getaway.dto.CountriesAndServiceName;
 import com.example.getaway.dto.Country;
 import com.example.getaway.dto.CountryAndServiceName;
@@ -9,6 +8,7 @@ import io.github.resilience4j.retry.annotation.Retry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
 
@@ -20,11 +20,13 @@ public class ProxyService {
     private ProxyService serviceClient;
 
     @CircuitBreaker(name = BACKEND_A, fallbackMethod = "allFallback")
+    @ResponseBody
     public CountriesAndServiceName getCountries() {
         return serviceClient.getCountries();
     }
 
     @CircuitBreaker(name = BACKEND_A, fallbackMethod = "oneFallback")
+    @ResponseBody
     public CountryAndServiceName getCountryById(@PathVariable(name = "id") Long id) {
         return serviceClient.getCountryById(id);
     }

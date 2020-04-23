@@ -10,8 +10,8 @@ import org.springframework.retry.annotation.EnableRetry;
 @EnableDiscoveryClient
 @SpringBootApplication
 @EnableFeignClients("com.example.getaway.client")
-@EnableRetry
-@EnableCircuitBreaker
+//@EnableRetry
+//@EnableCircuitBreaker
 public class GetawayApplication {
     public static void main(String[] args) {
         SpringApplication.run(GetawayApplication.class, args);
