@@ -17,7 +17,7 @@ public class ProxyService {
     private static final String BACKEND_A = "countries-service";
 
     @Autowired
-    private ProxyService serviceClient;
+    private CountriesService serviceClient;
 
     @CircuitBreaker(name = BACKEND_A, fallbackMethod = "allFallback")
     public CountriesAndServiceName getCountries() {

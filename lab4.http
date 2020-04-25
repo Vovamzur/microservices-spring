@@ -1,0 +1,38 @@
+###
+GET http://localhost:8080/getaway/countries
+Content-type: application/json
+
+###
+GET http://localhost:8080/getaway/countries/1
+Content-type: application/json
+
+###
+POST http://localhost:8080/getaway/countries/create
+Content-Type: application/json
+
+{
+	"name": "asdjh",
+	"currency": "UCHY",
+	"languages": ["china", "ukrainian"],
+	"capital": "Pekin",
+	"population": "1500000000",
+	"phonePrefix": "+86",
+	"budget": 100000,
+	"gdp": 29
+}
+
+###
+PUT http://localhost:8080/getaway/countries/update
+Content-Type: application/json
+
+{
+  "id": 1,
+	"name": "asdjh",
+	"currency": "UCHF",
+	"languages": ["china", "ukrainian"],
+	"capital": "Pekin",
+	"population": "1500000000",
+	"phonePrefix": "+86",
+	"budget": 100000,
+	"gdp": 29
+}

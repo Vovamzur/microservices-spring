@@ -1,6 +1,6 @@
 package com.example.getaway.controller;
 
-import com.example.getaway.ProxyService;
+import com.example.getaway.client.CountriesService;
 import com.example.getaway.dto.CountriesAndServiceName;
 import com.example.getaway.dto.Country;
 import com.example.getaway.dto.CountryAndServiceName;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 public class CountriesController {
 
     @Autowired
-    private ProxyService countriesService;
+    private CountriesService countriesService;
 
     @GetMapping("")
     @ResponseBody
