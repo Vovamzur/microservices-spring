@@ -18,6 +18,9 @@ services:
       WAITFORIT_HOST: eureka-server
       WAITFORIT_PORT: 8761
       WAITFORIT_TIMEOUT: 60
+      CONFIG_SERVER_PORT: ${CONFIG_SERVER_PORT}
+      EUREKA_SERVER_HOST: ${EUREKA_SERVER_HOST}
+      EUREKA_SERVER_PORT: ${EUREKA_SERVER_PORT}
     depends_on:
       - eureka-server
 
@@ -27,14 +30,14 @@ services:
     logging:
       driver: none
     environment:
-      POSTGRES_PASSWORD: password
-      POSTGRES_USER: postgres
-      POSTGRES_DB: countryDb
-      PGPORT: 5434
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_DB: ${DB_NAME}
+      PGPORT: ${DB_PORT}
     volumes:
       - /docker-volumes/postgres/data:/var/lib/postgresql/data
     ports:
-      - "5434:5434"
+      - "${DB_PORT}:${DB_PORT}"
 
   client:
     build:
@@ -46,6 +49,15 @@ services:
       WAITFORIT_HOST: configserver
       WAITFORIT_PORT: 8888
       WAITFORIT_TIMEOUT: 120
+      CONFIG_SERVER_HOST: ${CONFIG_SERVER_HOST}
+      CONFIG_SERVER_PORT: ${CONFIG_SERVER_PORT}
+      EUREKA_SERVER_HOST: ${EUREKA_SERVER_HOST}
+      EUREKA_SERVER_PORT: ${EUREKA_SERVER_PORT}
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT}
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_NAME: ${DB_NAME}
     depends_on:
       - eureka-server
       - postgres
@@ -61,6 +73,10 @@ services:
       WAITFORIT_HOST: configserver
       WAITFORIT_PORT: 8888
       WAITFORIT_TIMEOUT: 120
+      CONFIG_SERVER_HOST: ${CONFIG_SERVER_HOST}
+      CONFIG_SERVER_PORT: ${CONFIG_SERVER_PORT}
+      EUREKA_SERVER_HOST: ${EUREKA_SERVER_HOST}
+      EUREKA_SERVER_PORT: ${EUREKA_SERVER_PORT}
     depends_on:
       - eureka-server
       - client

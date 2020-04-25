@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -60,6 +59,7 @@ public class CountryController {
 
     @PostMapping("/create")
     @ResponseStatus(HttpStatus.CREATED)
+    @ResponseBody
     public Country saveNewCountry(
             @Valid @RequestBody Country country, BindingResult bindingResult
     ) throws ValidationException {
@@ -81,6 +81,7 @@ public class CountryController {
 
     @PutMapping("/update")
     @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
     public Country updateCountry(
             @Valid @RequestBody Country country, BindingResult bindingResult
     ) throws ValidationException, ResourceNotFoundException {
@@ -108,6 +109,7 @@ public class CountryController {
 
     @DeleteMapping("/delete/{id}")
     @ResponseStatus(HttpStatus.OK)
+    @ResponseBody
     public String deleteCountryById(@PathVariable(name = "id") Long id) {
         Optional<Country> bdCountry = this.countryRepository.findById(id);
 

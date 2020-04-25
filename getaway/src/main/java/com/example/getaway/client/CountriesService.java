@@ -7,21 +7,25 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
 @FeignClient(name = "countries-service", configuration = CountrieServiceConfigurations.class)
+@RequestMapping("/api/countries")
 public interface CountriesService {
-    @RequestMapping(method = RequestMethod.GET, value = "/api/countries", consumes = "application/json")
-//    @RequestMapping(method = RequestMethod.GET, value = "/api/countries")
+    @GetMapping(value = "", consumes = "application/json")
+    @ResponseBody
     CountriesAndServiceName getCountries();
 
-    @RequestMapping(method = RequestMethod.GET, value = "/api/countries/{countryId}", consumes = "application/json")
-//    @RequestMapping(method = RequestMethod.GET, value = "/api/countries/{countryId}")
+    @GetMapping(value = "/{countryId}", consumes = "application/json")
+    @ResponseBody
     CountryAndServiceName getCountryById(@PathVariable("countryId") Long countryId);
 
-    @RequestMapping(method = RequestMethod.POST, value = "/api/countries/create", consumes = "application/json")
+    @PostMapping(value = "/create", consumes = "application/json")
+    @ResponseBody
     Country saveNewCountry(@RequestBody Country country);
 
-    @RequestMapping(method = RequestMethod.PUT, value = "/api/countries/update", consumes = "application/json")
+    @PutMapping(value = "/update", consumes = "application/json")
+    @ResponseBody
     Country updateCountry(@RequestBody Country country);
 
-    @RequestMapping(method = RequestMethod.DELETE, value = "/api/countries/delete/{id}")
+    @DeleteMapping(value = "/delete/{id}", consumes = "application/json")
+    @ResponseBody
     String deleteCountryById(@PathVariable(name = "id") Long id);
 }
