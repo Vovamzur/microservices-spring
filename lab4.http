@@ -1,12 +1,12 @@
-###
+### Fetch entities
 GET http://localhost:8080/getaway/countries
 Content-type: application/json
 
-###
+### Fetch entity by id
 GET http://localhost:8080/getaway/countries/1
 Content-type: application/json
 
-###
+### Create entity
 POST http://localhost:8080/getaway/countries/create
 Content-Type: application/json
 
@@ -21,7 +21,7 @@ Content-Type: application/json
 	"gdp": 29
 }
 
-###
+### Update entity
 PUT http://localhost:8080/getaway/countries/update
 Content-Type: application/json
 
@@ -36,3 +36,7 @@ Content-Type: application/json
 	"budget": 100000,
 	"gdp": 29
 }
+
+### Delete entity
+DELETE http://localhost:8080/getaway/countries/delete/5
+Content-Type: application/json

@@ -6,6 +6,8 @@ import com.example.getaway.dto.CountryAndServiceName;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @FeignClient(name = "countries-service", configuration = CountrieServiceConfigurations.class)
 @RequestMapping("/api/countries")
 public interface CountriesService {
@@ -27,5 +29,5 @@ public interface CountriesService {
 
     @DeleteMapping(value = "/delete/{id}", consumes = "application/json")
     @ResponseBody
-    String deleteCountryById(@PathVariable(name = "id") Long id);
+    Map<String, String> deleteCountryById(@PathVariable(name = "id") Long id);
 }

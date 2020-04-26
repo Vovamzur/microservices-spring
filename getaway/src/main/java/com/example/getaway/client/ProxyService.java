@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 @Component
 public class ProxyService {
@@ -40,7 +41,7 @@ public class ProxyService {
     }
 
     @Retry(name = BACKEND_A)
-    public String deleteCountryById(@PathVariable(name = "id") Long id) {
+    public Map<String, String> deleteCountryById(@PathVariable(name = "id") Long id) {
         return this.serviceClient.deleteCountryById(id);
     }
 

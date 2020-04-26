@@ -14,6 +14,7 @@ wait until all services will be registered in eureka server :)
 ##### Service URL (instance 1): http://localhost:8081
 ##### Service URL (instance 2): http://localhost:8082
 ##### Config Server: http://localhost:8888
+##### Grafana UI: http://localhost:3000
 
 ## For checking refresh:
 ```bash

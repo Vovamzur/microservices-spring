@@ -17,6 +17,8 @@ import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
@@ -118,13 +120,15 @@ public class CountryController {
     @DeleteMapping("/delete/{id}")
     @ResponseStatus(HttpStatus.OK)
     @ResponseBody
-    public String deleteCountryById(@PathVariable(name = "id") Long id) {
+    public Map<String, String> deleteCountryById(@PathVariable(name = "id") Long id) {
         Optional<Country> bdCountry = this.countryRepository.findById(id);
 
         if (!bdCountry.isPresent()) {
             throw new ResourceNotFoundException("There is  no country with such id " + id);
         }
         this.countryRepository.deleteById(id);
-        return "Successfully deleted";
+        HashMap<String, String> result = new HashMap<>();
+        result.put("message", "Successfully deleted");
+        return result;
     }
 }

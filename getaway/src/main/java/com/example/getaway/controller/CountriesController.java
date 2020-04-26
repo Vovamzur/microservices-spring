@@ -7,6 +7,8 @@ import com.example.getaway.dto.CountryAndServiceName;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/getaway/countries")
 public class CountriesController {
@@ -37,7 +39,7 @@ public class CountriesController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public String deleteCountryById(@PathVariable(name = "id") Long id) {
+    public Map<String, String> deleteCountryById(@PathVariable(name = "id") Long id) {
         return this.countriesService.deleteCountryById(id);
     }
 }
