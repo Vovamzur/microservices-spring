@@ -91,16 +91,13 @@ services:
   prometheus:
     image: prom/prometheus
     container_name: prometheus
-    network_mode: host
     volumes:
-    - ./prometheus.yml:/etc/prometheus/prometheus.yml
-    ports:
-    - "9090:9090"
-    - "9080:9080"
+      - ./prometheus.yml:/etc/prometheus.yml
+    ports: 
+      - "9090:9090"
+      - "9080:9080"
   
   grafana:
     image: grafana/grafana
-    network_mode: host
     ports:
-    - "3000:3000"
-    
+      - "3000:3000"

@@ -8,11 +8,10 @@ scrape_configs:
   - job_name: 'prometheus'
     scrape_interval: 5s
     static_configs:
-      - targets: ['localhost:9090']
+      - targets: ['prometheus:9090']
       
   - job_name: 'resilience4j-spring-boot2-demo'
     scrape_interval: 5s
     metrics_path: /actuator/prometheus
     static_configs:
-      - targets: ['localhost:9080']
-      
+      - targets: ['getaway:9080']
