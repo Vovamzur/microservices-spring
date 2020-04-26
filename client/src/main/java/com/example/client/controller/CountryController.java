@@ -31,11 +31,19 @@ public class CountryController {
 
     private List<String> checkForUnique(Country country) {
         List<String> errors = new ArrayList<>();
-        if (countryRepository.findByCapital(country.getCapital()).isPresent()) {
-            errors.add("country with " + country.getCapital() + " capital is already exists");
-        }
-        if (countryRepository.findByName((country.getName())).isPresent()) {
-            errors.add("country with " + country.getName() + " name is already exists");
+        Long countryId = country.getId();
+        if (countryId != null) {
+            Optional<Country> countryByCapital = countryRepository.findByCapital(country.getCapital());
+            if (countryByCapital.isPresent() && !countryByCapital.get().getId().equals(countryId))
+                errors.add("another country with " + country.getCapital() + " capital is already exists");
+            Optional<Country> countryByName = countryRepository.findByName(country.getName());
+            if (countryByName.isPresent() && !countryByName.get().getId().equals(countryId))
+                errors.add("another country with " + country.getName() + " name is already exists");
+        } else {
+            if (countryRepository.findByCapital(country.getCapital()).isPresent())
+                errors.add("country with " + country.getCapital() + " capital is already exists");
+            if (countryRepository.findByName((country.getName())).isPresent())
+                errors.add("country with " + country.getName() + " name is already exists");
         }
         return errors;
     }

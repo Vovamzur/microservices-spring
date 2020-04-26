@@ -1,4 +1,4 @@
-package com.example.getaway;
+package com.example.getaway.client;
 
 import com.example.getaway.client.CountriesService;
 import com.example.getaway.dto.CountriesAndServiceName;
