@@ -22,3 +22,9 @@ docker exec -it containerID /bin/bash
 cd /configurations
 vi fileName.properties
 ```
+
+## For checkoinf fallbskc or retry
+```bash
+docker stop <container_id/container_name>
+docker start <container_id/container_name>
+```

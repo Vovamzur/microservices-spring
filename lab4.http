@@ -11,10 +11,10 @@ POST http://localhost:8080/getaway/countries/create
 Content-Type: application/json
 
 {
-	"name": "asdasdasdjh",
+	"name": "asdasdasdasdasda",
 	"currency": "UCHY",
 	"languages": ["china", "ukrainian"],
-	"capital": "Pekinasd",
+	"capital": "asdasdasdasdasdasd",
 	"population": "1500000000",
 	"phonePrefix": "+86",
 	"budget": 100000,
