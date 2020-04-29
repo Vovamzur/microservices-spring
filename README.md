@@ -23,7 +23,7 @@ cd /configurations
 vi fileName.properties
 ```
 
-## For checkoinf fallbskc or retry
+## For checking fallback or retry
 ```bash
 docker stop <container_id/container_name>
 docker start <container_id/container_name>

@@ -11,10 +11,10 @@ POST http://localhost:8080/getaway/countries/create
 Content-Type: application/json
 
 {
-	"name": "asdasdasdasdasda",
+	"name": "China",
 	"currency": "UCHY",
 	"languages": ["china", "ukrainian"],
-	"capital": "asdasdasdasdasdasd",
+	"capital": "Pekin",
 	"population": "1500000000",
 	"phonePrefix": "+86",
 	"budget": 100000,
@@ -27,7 +27,7 @@ Content-Type: application/json
 
 {
   "id": 1,
-	"name": "asdjh",
+	"name": "Ukranian",
 	"currency": "UCHF",
 	"languages": ["china", "ukrainian"],
 	"capital": "Pekin",
@@ -38,5 +38,5 @@ Content-Type: application/json
 }
 
 ### Delete entity
-DELETE http://localhost:8080/getaway/countries/delete/5
+DELETE http://localhost:8080/getaway/countries/delete/1
 Content-Type: application/json
