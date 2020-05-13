@@ -1,4 +1,4 @@
-package com.example.getaway;
+package com.example.getaway.client;
 
 import feign.FeignException;
 import org.json.JSONException;

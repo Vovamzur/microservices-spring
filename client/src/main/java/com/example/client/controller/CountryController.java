@@ -1,5 +1,6 @@
 package com.example.client.controller;
 
+import com.example.client.KafkaProducerDemo;
 import com.example.client.entity.Country;
 import com.example.client.exception.ResourceNotFoundException;
 import com.example.client.exception.ValidationException;
@@ -86,7 +87,10 @@ public class CountryController {
         if (uniqueErrors.size() > 0) {
             throw new ValidationException(uniqueErrors);
         }
-        return this.countryRepository.save(country);
+        final Country newCountry  = this.countryRepository.save(country);
+        KafkaProducerDemo.sendCreateMessage(newCountry);
+
+        return newCountry;
     }
 
     @PutMapping("/update")
@@ -114,7 +118,9 @@ public class CountryController {
             throw new ValidationException(uniqueErrors);
         }
 
-        return this.countryRepository.save(country);
+        final Country updateCountry = this.countryRepository.save(country);
+        KafkaProducerDemo.sendUpdateMessage(updateCountry);
+        return updateCountry;
     }
 
     @DeleteMapping("/delete/{id}")

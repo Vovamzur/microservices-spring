@@ -1,4 +1,4 @@
-package com.example.getaway.dto;
+package com.example.getaway.client.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

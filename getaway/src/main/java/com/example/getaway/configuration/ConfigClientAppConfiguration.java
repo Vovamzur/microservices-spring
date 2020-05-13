@@ -1,4 +1,4 @@
-package com.example.getaway;
+package com.example.getaway.configuration;
 
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;
