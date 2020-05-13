@@ -9,8 +9,7 @@ public class KafkaConsumerApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(KafkaConsumerApplication.class, args);
 		try {
-			KafkaConsumerDemo.runCreateEntityConsumer();
-			KafkaConsumerDemo.runUpdateEntityConsumer();
+			KafkaConsumerDemo.runConsumer();
 		} catch(Exception e) {
 			System.out.println(e);
 		}
