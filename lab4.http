@@ -27,7 +27,7 @@ Content-Type: application/json
 
 {
   "id": 1,
-	"name": "Ukranian",
+	"name": "HJK",
 	"currency": "UCHF",
 	"languages": ["china", "ukrainian"],
 	"capital": "Pekin",

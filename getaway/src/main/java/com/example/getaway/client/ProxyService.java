@@ -1,9 +1,8 @@
 package com.example.getaway.client;
 
-import com.example.getaway.client.CountriesService;
-import com.example.getaway.dto.CountriesAndServiceName;
-import com.example.getaway.dto.Country;
-import com.example.getaway.dto.CountryAndServiceName;
+import com.example.getaway.client.dto.CountriesAndServiceName;
+import com.example.getaway.client.dto.Country;
+import com.example.getaway.client.dto.CountryAndServiceName;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import io.github.resilience4j.retry.annotation.Retry;
 import org.springframework.beans.factory.annotation.Autowired;

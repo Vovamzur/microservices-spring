@@ -25,19 +25,14 @@ services:
       - eureka-server
 
   postgres:
-    image: postgres
+    image: postgres:12
     restart: always
-    logging:
-      driver: none
     environment:
       POSTGRES_PASSWORD: ${DB_PASSWORD}
       POSTGRES_USER: ${DB_USERNAME}
       POSTGRES_DB: ${DB_NAME}
-      PGPORT: ${DB_PORT}
     volumes:
       - /docker-volumes/postgres/data:/var/lib/postgresql/data
-    ports:
-      - "${DB_PORT}:${DB_PORT}"
 
   client:
     build:
@@ -82,6 +77,19 @@ services:
       - client
       - configserver
 
+  kafka-consumer:
+    build:
+      context: kafka-consumer
+      dockerfile: Dockerfile
+    ports:
+      - "8088:8088"
+    environment:
+      WAITFORIT_HOST: kafka
+      WAITFORIT_PORT: 9092
+      WAITFORIT_TIMEOUT: 120
+    depends_on:
+      - kafka
+      
   rabbit:
     image: rabbitmq:3
     ports:
@@ -101,3 +109,22 @@ services:
     image: grafana/grafana
     ports:
       - "3000:3000"
+
+  zookeeper:
+    image: wurstmeister/zookeeper
+    ports:
+      - "2181:2181"
+    hostname: zookeeper
+    
+  kafka:
+    image: wurstmeister/kafka
+    command: [start-kafka.sh]
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_CREATE_TOPICS: "create.entity:3:1,update.entity:3:1"
+      KAFKA_ADVERTISED_HOST_NAME: kafka
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_PORT: 9092
+    depends_on:
+      - zookeeper
